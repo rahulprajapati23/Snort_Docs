@@ -1,29 +1,16 @@
 # Snort Rules Documentation Project
 
-This repository contains a comprehensive overview and categorization of Snort rules used for network security analysis. It is designed to help students and security professionals understand the purpose and categorization of various Snort rule sets.
+## 🌐 Documentation Links
+Please choose your preferred language for the project documentation:
 
-## 📁 Project Contents
+- 🇮🇳 [**Hinglish Documentation (README-hinglish.md)**](README-hinglish.md)
+- 🇬🇧 [**English Documentation (README-english.md)**](README-english.md)
 
-- **`rules/`**: Directory containing 119 original Snort rule files.
-- **`Snort_Rules_Documentation.md`**: A detailed guide that categorizes and explains each rule set (Malware, Browser Exploits, Protocol Anomalies, etc.).
-- **`etc/snort.conf`**: A sample Snort configuration file.
+---
 
-## 🚀 Overview
-
-The documentation classifies rules into the following key areas:
-- **Browser & Client Exploits**
-- **Malware & Botnets**
-- **Web & Server Attacks**
-- **Protocol Anomalies**
-- **OS & Infrastructure Security**
-- **Indicators of Reconnaissance**
-- **File-Based Analysis**
-
-## 🛠️ Usage
-
-1. Review `Snort_Rules_Documentation.md` for a high-level understanding of the rules.
-2. Refer to the `rules/` directory for individual rule signatures.
-3. Use the documentation as a reference for SEM_06 Network Security coursework.
+## 🛠️ Quick Access
+- [Full Rules Index](Snort_Rules_Documentation.md)
+- [2026 Rules Folder](rules_2026/)
 
 ---
 *Maintained by Rahul Prajapati*

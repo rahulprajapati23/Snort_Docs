@@ -1,62 +1,43 @@
-# Snort/Suricata Preprocessor Rules Explanation
+# Snort Preprocessor Rules Explanation (Hinglish & English)
 
-Yeh file `preprocessor.rules` mein maujood rules ka explanation hai. Preprocessor ka kaam protocols ko deep level par analyze karna hota hai (jaise HTTP ka structure, Port scanning behavior, etc.).
+## 🇮🇳 Hinglish Explanation (Original Version)
 
-## Table of Contents
-1. [What is a Preprocessor?](#what-is-a-preprocessor)
-2. [Key Preprocessors Analyzed](#key-preprocessors-analyzed)
-    - [HTTP Inspect (HI)](#1-http-inspect-hi)
-    - [Portscan Detection (PSNG)](#2-portscan-detection-psng)
-    - [IP Fragmentation (FRAG3)](#3-ip-fragmentation-frag3)
-    - [Stream5 (TCP Stream Reassembly)](#4-stream5-tcp-stream-reassembly)
-    - [Application Protocols (SMTP, FTP, SSH)](#5-application-protocols-smtp-ftp-ssh)
+Yeh file `preprocessor.rules` ka detail hai. Preprocessor ka kaam IDS engine (standard rules) tak traffic pahunchne se pehle use "normalize" aur "clean" karna hota hai.
 
----
+### 🔍 Preprocessor Kya Hai?
+Preprocessor Snort ka woh "security guard" hai jo packet ke binary data ko rules check karne ke liye ready karta hai. Agar traffic malformed hai ya evasive (attack chhupane waali) hai, toh preprocessor vahi alert generate kar deta hai.
 
-## What is a Preprocessor?
-Preprocessor packet sniffing ke baad aur detection engine se pehle kaam karta hai. Iska kaam fragmented packets ko jodna, encrypted traffic ko decode karna, aur protocol ki anomalies check karna hai taaki false alerts kam ho sakein.
-
----
-
-## Key Preprocessors Analyzed
-
-### 1. HTTP Inspect (HI)
-- **GIDs: 119 (Client-side) & 120 (Server-side)**
-- **Role**: Yeh HTTP traffic ko scan karta hai. 
-- **Alerts**:
-    - `HI_CLIENT_DOUBLE_DECODE`: Jab client double encoding ka use karke bypass ki koshish kare.
-    - `HI_CLIENT_DIR_TRAV`: Directory traversal attack detection.
-    - `HI_SERVER_JS_OBFUSCATION`: Jab server suspicious obfuscated JavaScript bhej raha ho.
-
-### 2. Portscan Detection (PSNG)
-- **GID: 122**
-- **Role**: Yeh detect karta hai ki koi attackers aapke network ke ports scan toh nahi kar raha.
-- **Alerts**:
-    - `PSNG_TCP_PORTSCAN`: Seedha port scanning.
-    - `PSNG_UDP_PORTSWEEP`: Ek hi host par multiple UDP ports check karna.
-    - `PSNG_ICMP_PORTSWEEP`: ICMP (Ping) ka use karke live hosts dhoondhna.
-
-### 3. IP Fragmentation (FRAG3)
-- **GID: 123**
-- **Role**: Attackers aksar bade packets ko tukdo (fragments) mein bhejte hain detection se bachne ke liye. Frag3 inko analyze karta hai.
-- **Alerts**:
-    - `FRAG3_TEARDROP`: Ek purana Dos attack jisme fragments overlap karte hain.
-    - `FRAG3_SHORT_FRAG`: Bohat chote fragments jo suspicious hote hain.
-
-### 4. Stream5 (TCP Stream Reassembly)
-- **GID: 129**
-- **Role**: TCP sessions ko track karna.
-- **Alerts**:
-    - `STREAM5_SESSION_HIJACKED`: Session hijacking ki koshish.
-    - `STREAM5_DATA_ON_SYN`: SYN packet (connection start) ke saath data bhejna (invalid behavior).
-
-### 5. Application Protocols (SMTP, FTP, SSH)
-- **SMTP (GID 124)**: Email attacks like command overflow.
-- **FTP (GID 125)**: File transfer attacks, bounce attacks.
-- **SSH (GID 128)**: Secure shell attacks, version mismatch.
+### 🛡️ Main Preprocessor Alerts
+- **GID: 119, 122, 125, 129, etc.**
+- **HTTP Inspect (GID 119)**:
+    - `HTTP_OVERSZ_CHUNK_STACK`: Agar attacker boht badi chunks bhej ke buffer overflow karne ki koshish kare.
+    - `HTTP_NON_RFC_CHAR`: HTTP signatures mein ajeeb characters dhoondhna.
+- **Stream5 (GID 135)**:
+    - `STREAM5_TCP_OVERLAP_DIFFERENT_DATA`: TCP Segmentation attack ko pakadna.
+- **DCE/RPC (GID 130)**:
+    - `DCERPC_MS08_067`: Famous Windows remote exploit ka detection.
 
 ---
 
-## Metadata and SID
-- In rules mein `sid` (Signature ID) hamesha unique rehta hai lekin rules aksar complex patterns ke bajaye protocol logic par chalti hain.
-- `classtype`: Rules ko categorize karta hai (e.g., `attempted-admin`, `protocol-command-decode`).
+## 🇬🇧 Simple English Explanation (New Version)
+
+This document explains the functionality of `preprocessor.rules`. A preprocessor is responsible for "normalizing" and "cleaning" network traffic before it reaches the main detection engine.
+
+### 🔍 What is a Preprocessor?
+Think of a preprocessor as a "security guard" that prepares raw data for inspection. It identifies malformed packets or evasion techniques used by attackers to hide malicious activity.
+
+### 🛡️ Key Preprocessor Alerts
+- **GID: 119, 122, 125, 129, etc.**
+- **HTTP Inspect (GID 119)**:
+    - `HTTP_OVERSZ_CHUNK_STACK`: Prevents buffer overflow attacks caused by oversized data chunks.
+    - `HTTP_NON_RFC_CHAR`: Detects invalid characters in HTTP requests.
+- **Stream5 (GID 135)**:
+    - `STREAM5_TCP_OVERLAP_DIFFERENT_DATA`: Detects TCP overlapping segmentation attacks used to bypass firewalls.
+- **DCE/RPC (GID 130)**:
+    - `DCERPC_MS08_067`: Detects historical but critical Windows remote code execution exploits.
+
+---
+
+## 📝 Summary / Conclusion
+Dono languages mein yeh file aapko preprocessor ke roles aur unke specific alerts ko samajhne mein madad karegi.
+Both versions help you understand the role of preprocessors in maintaining network hygiene.

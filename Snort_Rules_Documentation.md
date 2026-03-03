@@ -1,18 +1,29 @@
-# Snort Rules Documentation
+# Snort Rules Comprehensive Documentation
 
-This document provides a categorized overview of the Snort rule files located in the `rules/` and `rules_2026/` directories. These rules are essential for detecting various types of network threats.
-
----
-
-## 🌟 Latest 2026 Threats (New Folder: `rules_2026/`)
-These rules target the most recent vulnerabilities and malware campaigns discovered in 2026.
-
-- **vulnerability-2026.rules**: Detection for critical 2026 CVEs including Snort 3 DCE/RPC flaws, Windows Elevation of Privilege, and Cisco SD-WAN zero-days.
-- **malware-2026.rules**: Protective signatures against the latest 2026 malware like the "Dohdoor" backdoor.
+## 🌐 Choose Your Language / Apni Bhasha Chunye
+- [🇮🇳 **Hinglish Version** (Hindi + English)](README-hinglish.md)
+- [🇬🇧 **Simple English Version**](README-english.md)
 
 ---
 
-## 📂 Rule Categories
+## 🏗️ Project Structure & Deep Dives
+Detailed explanations for each component:
 
-### 🖱️ Browser & Client Exploits
-... [remains same as before] ...
+| Component | Hinglish Documentation | English Documentation |
+| :--- | :--- | :--- |
+| **All Rules Summary** | [summary-hinglish.md](rules/summary-hinglish.md) | [summary-english.md](rules/summary-english.md) |
+| **Preprocessors** | [preprocessor-hinglish.md](preproc_rules/preprocessor-hinglish.md) | [preprocessor-english.md](preproc_rules/preprocessor-english.md) |
+| **Shared Object Rules** | [so-rules-hinglish.md](so_rules/so-rules-hinglish.md) | [so-rules-english.md](so_rules/so-rules-english.md) |
+| **Sensitive Data** | [sensitive-data-hinglish.md](preproc_rules/sensitive-data-hinglish.md) | [sensitive-data-english.md](preproc_rules/sensitive-data-english.md) |
+
+---
+
+### 🌟 Latest 2026 Threats (New Folder: `rules_2026/`)
+Targeting vulnerabilities and malware discovered in early 2026.
+
+| File Name | Description |
+| :--- | :--- |
+| **vulnerability-2026.rules** | Detects CVE-2026-20027, CVE-2026-21238, etc. |
+| **malware-2026.rules** | Signatures for the 2026 "Dohdoor" backdoor. |
+
+... [Previous index remains for quick reference] ...
